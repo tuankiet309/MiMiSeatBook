@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  seatbook:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/seatbook
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: example
+      SPRING_REDIS_HOST: redis
+    depends_on:
+      - db
+      - redis
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: seatbook
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: abc123
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
+volumes:
+  db_data:
+  redis_data:

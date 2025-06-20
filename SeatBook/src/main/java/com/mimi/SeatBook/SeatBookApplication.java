@@ -2,9 +2,15 @@ package com.mimi.SeatBook;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 
-@SpringBootApplication
-public class SeatBookApplication {
+@SpringBootApplication(
+		exclude = {
+				SecurityAutoConfiguration.class,
+				UserDetailsServiceAutoConfiguration.class
+		}
+)public class SeatBookApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SeatBookApplication.class, args);
