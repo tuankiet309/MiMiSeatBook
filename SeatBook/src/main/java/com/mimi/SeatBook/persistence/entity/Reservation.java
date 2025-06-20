@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 @Entity
 @Table(name = "reservation")
@@ -18,17 +18,17 @@ public class Reservation extends BaseEntity{
     private Seat seat;
 
     @Column(name="start_time", nullable=false)
-    private OffsetDateTime startTime;
+    private LocalDateTime  startTime;
 
     @Column(name="end_time", nullable=false)
-    private OffsetDateTime endTime;
+    private LocalDateTime endTime;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable=false)
     private ReservationStatus status;
 
     @Column(name="check_in_at")
-    private OffsetDateTime checkInAt;
+    private LocalDateTime  checkInAt;
 
     @ManyToOne
     @JoinColumn(name="extended_from_reservation_id")

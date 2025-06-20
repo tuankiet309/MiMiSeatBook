@@ -2,8 +2,10 @@ package com.mimi.SeatBook.application.service;
 
 import com.mimi.SeatBook.persistence.interfaceProjection.AvailableSeat;
 import com.mimi.SeatBook.persistence.repository.SeatRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -13,8 +15,8 @@ public class SeatService {
     public SeatService(SeatRepository repo){ this.repo = repo; }
 
     public List<AvailableSeat> findAvailable(
-            OffsetDateTime start,
-            OffsetDateTime end,
+            LocalDateTime start,
+            LocalDateTime end,
             Integer buildingId,
             Integer floorId,
             int page,
@@ -23,5 +25,14 @@ public class SeatService {
         return repo.searchAvailableSeats(
                 start, end, buildingId, floorId, page, perPage
         );
+    }
+    @Transactional
+    public Integer reserveSeat(
+            Integer userId,
+            Integer seatId,
+            LocalDateTime start,
+            LocalDateTime end
+    ) {
+        return repo.fnReserveSeat(userId, seatId, start, end);
     }
 }

@@ -10,7 +10,8 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
 				SecurityAutoConfiguration.class,
 				UserDetailsServiceAutoConfiguration.class
 		}
-)public class SeatBookApplication {
+)
+public class SeatBookApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SeatBookApplication.class, args);
