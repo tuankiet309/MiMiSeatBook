@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.List;
 public interface SeatRepository extends JpaRepository<Seat,Integer> {
 
@@ -28,11 +27,7 @@ public interface SeatRepository extends JpaRepository<Seat,Integer> {
             int page,
             int perPage
     );
-    @Procedure(procedureName = "fn_reserve_seat")
-    Integer fnReserveSeat(
-            @Param("p_user_id") Integer userId,
-            @Param("p_seat_id") Integer seatId,
-            @Param("p_start")   LocalDateTime start,
-            @Param("p_end")     LocalDateTime end
-    );
+
+
+
 }

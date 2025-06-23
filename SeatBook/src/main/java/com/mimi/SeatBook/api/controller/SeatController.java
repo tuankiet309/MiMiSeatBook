@@ -1,5 +1,8 @@
 package com.mimi.SeatBook.api.controller;
 
+import com.mimi.SeatBook.api.dto.CheckInSeatInDto;
+import com.mimi.SeatBook.api.dto.CheckInSeatOutDto;
+import com.mimi.SeatBook.api.dto.ReservationRequest;
 import com.mimi.SeatBook.application.service.SeatService;
 import com.mimi.SeatBook.persistence.interfaceProjection.AvailableSeat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,34 +31,5 @@ public class SeatController {
     ) {
         return svc.findAvailable(start, end, buildingId, floorId, page, perPage);
     }
-    @PostMapping("/reserve")
-    public ResponseEntity<?> reserve(@RequestBody ReservationRequest req) {
-        Integer resId = svc.reserveSeat(
-                req.getUserId(),
-                req.getSeatId(),
-                req.getStart(),
-                req.getEnd()
-        );
-        return ResponseEntity.ok(resId);
-    }
-    public static class ReservationRequest {
-        private Integer userId;
-        private Integer seatId;
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-        private LocalDateTime start;
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-        private LocalDateTime end;
 
-        public Integer getUserId() { return userId; }
-        public void setUserId(Integer userId) { this.userId = userId; }
-
-        public Integer getSeatId() { return seatId; }
-        public void setSeatId(Integer seatId) { this.seatId = seatId; }
-
-        public LocalDateTime getStart() { return start; }
-        public void setStart(LocalDateTime start) { this.start = start; }
-
-        public LocalDateTime getEnd() { return end; }
-        public void setEnd(LocalDateTime end) { this.end = end; }
-    }
 }
